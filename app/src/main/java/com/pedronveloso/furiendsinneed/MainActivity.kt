@@ -24,6 +24,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onBackPressed() {
+        if (navigationViewModel.onBack().not()) {
+            super.onBackPressed()
+        }
+    }
 }
 
 @Composable

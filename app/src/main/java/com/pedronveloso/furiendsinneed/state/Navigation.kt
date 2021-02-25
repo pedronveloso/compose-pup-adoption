@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.pedronveloso.furiendsinneed.data.Dog
 
 enum class ScreenName { HOME, DETAILS }
 
@@ -12,6 +13,9 @@ class NavigationViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
 
     private val _currentScreen = MutableLiveData(ScreenName.HOME)
     val currentScreen: LiveData<ScreenName> = _currentScreen
+
+    private val _currentDog: MutableLiveData<Dog> = MutableLiveData()
+    val currentDog: LiveData<Dog> = _currentDog
 
     /**
      * Go back (always to [ScreenName.HOME]).
@@ -32,5 +36,11 @@ class NavigationViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
     @MainThread
     fun navigateTo(screen: ScreenName) {
         _currentScreen.postValue(screen)
+    }
+
+    @MainThread
+    fun showPupDetails(dog: Dog) {
+        _currentDog.postValue(dog)
+        _currentScreen.postValue(ScreenName.DETAILS)
     }
 }

@@ -1,6 +1,7 @@
 package com.pedronveloso.furiendsinneed.ui.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -19,6 +20,7 @@ import com.pedronveloso.furiendsinneed.R
 import com.pedronveloso.furiendsinneed.data.Breed
 import com.pedronveloso.furiendsinneed.data.Dog
 import com.pedronveloso.furiendsinneed.state.DogsViewModel
+import com.pedronveloso.furiendsinneed.ui.NavigationViewModel
 import com.pedronveloso.furiendsinneed.ui.theme.FURiendsInNeedTheme
 import com.pedronveloso.furiendsinneed.ui.theme.Typography
 
@@ -33,8 +35,14 @@ fun HomeScreenStart(dogsViewModel: DogsViewModel = viewModel()) {
 }
 
 @Composable
-fun DrawPupCard(dog: Dog) {
-    Card(Modifier.padding(8.dp)) {
+fun DrawPupCard(dog: Dog, navigationViewModel: NavigationViewModel = viewModel()) {
+    Card(
+        Modifier
+            .padding(8.dp)
+            .clickable(onClick = {
+                navigationViewModel.showPupDetails(dog)
+            })
+    ) {
         Column(Modifier.padding(8.dp)) {
             Image(
                 painter = painterResource(dog.photo),
@@ -45,17 +53,22 @@ fun DrawPupCard(dog: Dog) {
             Spacer(Modifier.height(4.dp))
             Text(dog.name, style = Typography.h4)
             Spacer(Modifier.height(4.dp))
-            Row(Modifier.fillMaxWidth()) {
-                Text(stringResource(id = R.string.dog_age, dog.ageMonths), style = Typography.body2)
-                Spacer(Modifier.width(8.dp))
-                Text("·", style = Typography.body1)
-                Spacer(Modifier.width(8.dp))
-                Text(dog.breed.breedName, style = Typography.body2)
-            }
-
+            DogAgeAndBreedRow(dog)
         }
     }
 }
+
+@Composable
+fun DogAgeAndBreedRow(dog: Dog) {
+    Row(Modifier.fillMaxWidth()) {
+        Text(stringResource(id = R.string.dog_age, dog.ageMonths), style = Typography.body2)
+        Spacer(Modifier.width(8.dp))
+        Text("·", style = Typography.body1)
+        Spacer(Modifier.width(8.dp))
+        Text(dog.breed.breedName, style = Typography.body2)
+    }
+}
+
 
 @Preview
 @Composable
