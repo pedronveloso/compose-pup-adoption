@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">FURiends in need</string>
+    <string name="dog_age">%d months</string>
+</resources>
