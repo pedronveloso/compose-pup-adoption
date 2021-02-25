@@ -1,5 +1,7 @@
 package com.pedronveloso.furiendsinneed.data
 
+import com.pedronveloso.furiendsinneed.R
+
 object PupsProvider {
 
     val pupsList: List<Dog> by lazy { sPAWnPups() }
@@ -8,7 +10,7 @@ object PupsProvider {
         val shelter = arrayListOf<Dog>()
 
         for (i in PUP_NAMES.indices) {
-            shelter.add(Dog(PUP_NAMES[i], PUP_AGES[i], LOREM_IPSUM, PUP_BREEDS[i]))
+            shelter.add(Dog(PUP_NAMES[i], PUP_AGES[i], LOREM_IPSUM, PUP_BREEDS[i], PUP_PHOTOS[i]))
         }
 
         return shelter
@@ -16,8 +18,11 @@ object PupsProvider {
 
 
     private val PUP_NAMES = listOf("Hulk", "Mila", "Max", "Taco", "Dior")
-    private val PUP_BREEDS = listOf(Breed.MIXED, Breed.MIXED, Breed.MIXED, Breed.MIXED, Breed.MIXED)
+    private val PUP_BREEDS =
+        listOf(Breed.MIXED, Breed.GERMAN_SHEPARD, Breed.LABRADOR, Breed.POMERANIAN, Breed.GREYHOUND)
     private val PUP_AGES = listOf(4, 3, 12, 4, 6)
+    private val PUP_PHOTOS =
+        listOf(R.drawable.pup1, R.drawable.pup2, R.drawable.pup3, R.drawable.pup4, R.drawable.pup5)
 }
 
 
